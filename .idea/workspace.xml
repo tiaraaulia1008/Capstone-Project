@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="faf1bdcc-47fe-4af0-9601-27eefd386bd3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Cell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CellStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameBoardPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Puzzle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SudokuConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SudokuMain.java" afterDir="false" />
+    <list default="true" id="faf1bdcc-47fe-4af0-9601-27eefd386bd3" name="Changes" comment="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tiaracoba.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Capstone-Project/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Capstone-Project/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Capstone-Project/Tiaracoba.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +36,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.SudokuMain.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "ASD__SUDOKU",
     "kotlin-language-version-configured": "true"
@@ -63,7 +59,39 @@
       <option name="project" value="LOCAL" />
       <updated>1733048950225</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add Cell, CellStatus, GameBoardPanel, Main, Puzzle, SudokuConstants, and SudokuMain">
+      <option name="closed" value="true" />
+      <created>1733049557724</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733049557724</updated>
+    </task>
+    <task id="LOCAL-00003" summary="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push">
+      <option name="closed" value="true" />
+      <created>1733101988894</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733101988894</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add Cell, CellStatus, GameBoardPanel, Main, Puzzle, SudokuConstants, and SudokuMain" />
+    <MESSAGE value="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push" />
+    <option name="LAST_COMMIT_MESSAGE" value="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push" />
   </component>
 </project>
