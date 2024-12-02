@@ -20,7 +20,7 @@ public class GameBoardPanel extends JPanel {
     /** The game board composes of 9x9 Cells (customized JTextFields) */
     private Cell[][] cells = new Cell[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];
     /** It also contains a Puzzle with array numbers and isGiven */
-    private Puzzle puzzle = new Puzzle();
+    private Puzzle puzzle = new Puzzle.getInstance();
 
     /** Constructor */
     public GameBoardPanel() {
@@ -42,8 +42,8 @@ public class GameBoardPanel extends JPanel {
 
         // [TODO 4] Adds this common listener to all editable cells
         // [TODO 4]
-        for (int row ...) {
-            for (int col ...) {
+        for (int row = 0; row < SudokuConstants.GRID_SIZE; row++) {
+            for (int col = 0; col < SudokuContants.GRID_SIZE; col++) {
                 if (cells[row][col].isEditable()) {
                     cells[row][col].addActionListener(listener);   // For all editable rows and cols
                 }
@@ -92,23 +92,23 @@ public class GameBoardPanel extends JPanel {
             Cell sourceCell = (Cell)e.getSource();
 
             // Retrieve the int entered
-            int numberIn = Integer.parseInt(sourceCell.getText());
-            // For debugging
-            System.out.println("You entered " + numberIn);
-
+            try {
+                int numberIn = Integer.parseInt(sourceCell.getText());
+                // For debugging
+                System.out.println("You entered " + numberIn);
+            }
             /*
              * [TODO 5] (later - after TODO 3 and 4)
              * Check the numberIn against sourceCell.number.
              * Update the cell status sourceCell.status,
              * and re-paint the cell via sourceCell.paint().
              */
-            //if (numberIn == sourceCell.number) {
-            //   sourceCell.status = CellStatus.CORRECT_GUESS;
-            //} else {
-            //   ......
-            //}
-            //sourceCell.paint();   // re-paint this cell based on its status
-
+            if (numberIn == sourceCell.number) {
+               sourceCell.status = CellStatus.CORRECT_GUESS;
+            } else {
+               soureCell.status = CellStatus.WRONG_GUESS;
+            }
+            sourceCell.paint();   // re-paint this cell based on its status
          /*
           * [TODO 6] (later)
           * Check if the player has solved the puzzle after this move,
@@ -122,7 +122,11 @@ public class GameBoardPanel extends JPanel {
             isEditable():boolean
             setEditable(boolean b)
             // [TODO 6]
-            JOptionPane.showMessageDialog(null, "Congratulation!");
+            if(isSolved()) {
+                JOptionPane.showMessageDialog(null, "Congratulation!");
+            }
+        } catch(NumberFormatException ex){
+            System.out.println("Invalid input. Please enter a number.");
         }
     }
 }
