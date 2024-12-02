@@ -115,12 +115,12 @@ public class GameBoardPanel extends JPanel {
           *   by calling isSolved(). Put up a congratulation JOptionPane, if so.
           Common colors are defined via constants such as Color.RED, Color.GREEN, Color.BLUE, and etc (But don't use these ugly colors. Design a color theme).
           */
-            setBackground(Color c)  // Set the background color of the component
+           /* setBackground(Color c)  // Set the background color of the component
             setForeground(Color c)  // Set the text color of the JTextField
             setFont(Font f)         // Set the font used by the JTextField
             setHorizontalAlignment(int align);  // align: JTextField.CENTER, JTextField.LEFT, JTextField.RIGHT
             isEditable():boolean
-            setEditable(boolean b)
+            setEditable(boolean b) */
             // [TODO 6]
             if(isSolved()) {
                 JOptionPane.showMessageDialog(null, "Congratulation!");
