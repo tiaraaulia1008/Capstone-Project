@@ -1,5 +1,5 @@
 //To store the named constants such as GRID_SIZE - to be referred to as SudokuConstants.GRID_SIZE.
-package sudoku;
+package Capstone-Project;
 /**
  * Define the named constants used in many classes.
  */
