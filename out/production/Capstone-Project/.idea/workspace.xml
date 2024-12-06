@@ -5,24 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="faf1bdcc-47fe-4af0-9601-27eefd386bd3" name="Changes" comment="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push">
-      <change afterPath="$PROJECT_DIR$/sudoku/sudoku/SudokuMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sudoku/GameBoardPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sudoku/TTT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CellStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/CellStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameBoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameBoardPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Puzzle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Puzzle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SudokuConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/SudokuConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sudoku/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sudoku/CellStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/CellStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sudoku/GameBoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/GameBoardPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sudoku/Puzzle.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/Puzzle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sudoku/SudokuConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/SudokuConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sudoku/SudokuMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/SudokuMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sudoku/sudoku/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/sudoku/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sudoku/sudoku/CellStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/sudoku/CellStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sudoku/sudoku/GameBoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/sudoku/GameBoardPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sudoku/sudoku/Puzzle.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/sudoku/Puzzle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sudoku/sudoku/SudokuConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/sudoku/SudokuConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CellStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/CellStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameBoardPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Puzzle.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/Puzzle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SudokuConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/SudokuConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SudokuMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/SudokuMain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +50,7 @@
     "Application.SudokuMain.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Merging ASD__SUDOKU",
+    "git-widget-placeholder": "ASD__SUDOKU",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
