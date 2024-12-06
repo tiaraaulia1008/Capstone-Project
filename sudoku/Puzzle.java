@@ -5,6 +5,12 @@
 /**
  * The Sudoku number puzzle to be solved
  */
+
+package sudoku;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
 public class Puzzle {
     // All variables have package access
     // The numbers on the puzzle
