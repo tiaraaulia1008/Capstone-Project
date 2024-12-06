@@ -23,6 +23,7 @@ public class SudokuMain extends JFrame {
    JButton pauseButton = new JButton("Pause");
    JButton resumeButton = new JButton("Resume");
    JPanel buttonPanel = new JPanel(new FlowLayout());
+   JComboBox<String> levelSelector = new JComboBox<>(new String[]{"Easy", "Intermediate", "Difficult"}); //set level
    private Timer timer; // Timer untuk menghitung waktu
    private int elapsedSeconds = 0; // Total waktu berjalan
    private boolean isPaused = false; // Status apakah timer sedang berhenti
@@ -32,30 +33,49 @@ public class SudokuMain extends JFrame {
 
    // Constructor
    public SudokuMain() {
-      Container cp = getContentPane();
-      cp.setLayout(new BorderLayout());
+        Container cp = getContentPane();
+        cp.setLayout(new BorderLayout());
 
-      cp.add(board, BorderLayout.CENTER);
+        cp.add(board, BorderLayout.CENTER);
 
-      // Add a button to the south to re-start the game via board.newGame()
-      btnNewGame.addActionListener( e -> board.newGame());
-      cp.add(btnNewGame, BorderLayout.SOUTH);
+        // Add a button to the south to re-start the game via board.newGame()
+        btnNewGame.addActionListener( e -> board.newGame());
+        cp.add(btnNewGame, BorderLayout.SOUTH);
 
-      // Add status bar to bottom
-      statusBar.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-      cp.add(statusBar, BorderLayout.SOUTH);
+        // Add status bar to bottom
+        statusBar.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        cp.add(statusBar, BorderLayout.SOUTH);
 
-      // Panel for timer and controls (timer + pause button)
-      JPanel topPanel = new JPanel();
-      topPanel.setLayout(new FlowLayout(FlowLayout.LEFT));  // Align components to the left
-      topPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));  // Optional padding
+        // Panel for timer and controls (timer + pause button)
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new FlowLayout(FlowLayout.LEFT));  // Align components to the left
+        
+        topPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));  // Optional padding
 
-      timerLabel.setHorizontalAlignment(SwingConstants.LEFT);
-      topPanel.add(timerLabel);
+        timerLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        topPanel.add(timerLabel);
 
-      topPanel.add(pauseButton);  // Add Pause button next to timer label
+        topPanel.add(pauseButton);  // Add Pause button next to timer label
 
-      cp.add(topPanel, BorderLayout.NORTH);  // Add to the top of the frame
+        cp.add(topPanel, BorderLayout.NORTH);  // Add to the top of the frame
+
+        JPanel controlPanel = new JPanel();
+        controlPanel.setLayout(new FlowLayout());
+
+        levelSelector.addActionListener(e -> {
+            String selectedLevel = (String) levelSelector.getSelectedItem();
+            board.setLevel(selectedLevel);
+            board.newGame();
+        });
+
+        JButton btnNewGame = new JButton("New Game");
+        btnNewGame.addActionListener(e -> board.newGame());
+        controlPanel.add(new JLabel("Select Level:"));
+        controlPanel.add(levelSelector);
+        controlPanel.add(btnNewGame);
+        
+        cp.add(controlPanel, BorderLayout.SOUTH); // add control botton diletakkan di bawah
+        board.newGame();
 
       /// Timer logic
         timer = new Timer(1000, e -> {

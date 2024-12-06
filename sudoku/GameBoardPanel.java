@@ -25,7 +25,8 @@ public class GameBoardPanel extends JPanel {
     /** The game board composes of 9x9 Cells (customized JTextFields) */
     private Cell[][] cells = new Cell[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];
     /** It also contains a Puzzle with array numbers and isGiven */
-    private Puzzle puzzle = new Puzzle.getInstance();
+    private Puzzle puzzle = new Puzzle();
+    private String currentLevel = "Easy"; //initialize to set level
 
     /** Constructor */
     public GameBoardPanel() {
@@ -58,18 +59,23 @@ public class GameBoardPanel extends JPanel {
         super.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
     }
 
+    public void setLevel(String level) { //method to set level
+        this.currentLevel = level;
+    }
+
     /**
      * Generate a new puzzle; and reset the game board of cells based on the puzzle.
      * You can call this method to start a new game.
      */
     public void newGame() {
         // Generate a new puzzle
-        puzzle.newPuzzle(2);
+        puzzle.newPuzzle(currentLevel);
 
         // Initialize all the 9x9 cells, based on the puzzle.
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
             for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
                 cells[row][col].newGame(puzzle.numbers[row][col], puzzle.isGiven[row][col]);
+                cells[row][col].setHighlighted(false); // Reset highlight
             }
         }
     }
@@ -89,19 +95,43 @@ public class GameBoardPanel extends JPanel {
         return true;
     }
 
+    // ADD FITUR UNTUK MENYEMPURNAAN GUI GRID 
+    @Override
+    protected void paintComponent(Graphics g) { // Membuat grid 3x3
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+
+        // Garis tipis untuk grid utama
+        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(1));
+        for (int i = 1; i < SudokuConstants.GRID_SIZE; i++) {
+            int linePos = i * CELL_SIZE;
+            g2d.drawLine(0, linePos, BOARD_WIDTH, linePos); // Horizontal
+            g2d.drawLine(linePos, 0, linePos, BOARD_HEIGHT); // Vertical
+        }
+
+        // Garis tebal untuk subgrid 3x3
+        g2d.setStroke(new BasicStroke(3));
+        for (int i = 0; i <= SudokuConstants.SUBGRID_SIZE; i++) {
+            int linePos = i * SudokuConstants.SUBGRID_SIZE * CELL_SIZE;
+            g2d.drawLine(0, linePos, BOARD_WIDTH, linePos); // Horizontal
+            g2d.drawLine(linePos, 0, linePos, BOARD_HEIGHT); // Vertical
+        }
+    }
+
     // [TODO 2] Define a Listener Inner Class for all the editable Cells
    private class CellInputListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
        // Get a reference of the JTextField that triggers this action event
        Cell sourceCell = (Cell)e.getSource();
-       
-       // Retrieve the int entered
-       int numberIn = Integer.parseInt(sourceCell.getText());
-       // For debugging
-       System.out.println("You entered " + numberIn);
+       try {
+        int numberIn = Integer.parseInt(sourceCell.getText()); // Get the number entered
 
-       /*
+        // Debugging line to print the entered number
+        System.out.println("You entered " + numberIn);
+
+        /*
         * [TODO 5] (later - after TODO 3 and 4)
         * Check the numberIn against sourceCell.number.
         * Update the cell status sourceCell.status,
@@ -116,9 +146,12 @@ public class GameBoardPanel extends JPanel {
             sourceCell.setBackground(Color.RED);  // Set background to red for wrong guess
             sourceCell.setForeground(Color.WHITE);  // Set text color to white
         }
-        sourceCell.paint();   // re-paint this cell based on its status
+        sourceCell.paint(); // Re-paint the cell based on its updated status
 
-         /*
+        // Highlight all cells with the same number (except the input cell itself)
+        highlightCells(numberIn, sourceCell);
+        
+        /*
           * [TODO 6] (later)
           * Check if the player has solved the puzzle after this move,
           *   by calling isSolved(). Put up a congratulation JOptionPane, if so.
@@ -131,14 +164,42 @@ public class GameBoardPanel extends JPanel {
             isEditable():boolean
             setEditable(boolean b) */
             // [TODO 6]
-            if(isSolved()) {
-                JOptionPane.showMessageDialog(null, "Congratulation!");
+        // Check if the puzzle is solved
+        if (isSolved()) {
+            JOptionPane.showMessageDialog(null, "Congratulations! You solved the puzzle.");
+        } 
+        } catch (NumberFormatException ex) {
+            // Handle invalid input (non-numeric input)
+            JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid number.");
+            }          
+        }
+    }
+
+    // Method untuk memberikan highlight sesuai aturan
+    private void highlightCells(int number, Cell excludeCell) {
+        // Reset semua highlight
+        for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
+            for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
+                cells[row][col].setHighlighted(false); // Reset highlight
+                cells[row][col].paint(); // Redraw untuk menghapus highlight
             }
-            try {
-                String input = "abc";
-                Integer.parseInt(input);  // Ini akan melempar NumberFormatException
-            } catch (NumberFormatException ex) {
-                System.out.println("Invalid input. Please enter a number.");
+        }
+    
+        // Highlight sel dengan angka yang sama, kecuali sel yang diinput
+        for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
+            for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
+                Cell cell = cells[row][col];
+                if (!cell.getText().isEmpty() && cell != excludeCell) {
+                    try {
+                        int cellValue = Integer.parseInt(cell.getText());
+                        if (cellValue == number) { // Jika angka cocok
+                            cell.setHighlighted(true); // Set highlight
+                            cell.paint(); // Highlight sel
+                        }
+                    } catch (NumberFormatException e) {
+                        // Abaikan jika input tidak valid (tidak seharusnya terjadi)
+                    }
+                }
             }
         }
     }

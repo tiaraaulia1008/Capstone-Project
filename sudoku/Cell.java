@@ -35,6 +35,7 @@ public class Cell extends JTextField {
     int number;
     /** The status of this cell defined in enum CellStatus */
     CellStatus status;
+    boolean isHighlighted = false;  // Flag to highlight matching cells
 
     /** Constructor */
     public Cell(int row, int col) {
@@ -72,7 +73,15 @@ public class Cell extends JTextField {
         } else if (status == CellStatus.WRONG_GUESS) {    // from TO_GUESS
             super.setBackground(BG_WRONG_GUESS);
         }
+
+        // Tambahkan efek highlight di atas warna default
+        if (isHighlighted) {
+            super.setBackground(new Color(173, 216, 230)); // Highlight overlay dengan warna biru muda
+        }
     }
 
-
+    // Method to highlight the cell when value matches
+    public void setHighlighted(boolean highlighted) {
+        this.isHighlighted = highlighted;
+    }
 }
