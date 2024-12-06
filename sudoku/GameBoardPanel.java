@@ -8,9 +8,12 @@
 * 3 - 5026231148 - Tiara Aulia Azadirachta Indica
 */
 
+package sudoku;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import static sudoku.Cell.*;
 
 public class GameBoardPanel extends JPanel {
     private static final long serialVersionUID = 1L;  // to prevent serial warning
@@ -26,7 +29,6 @@ public class GameBoardPanel extends JPanel {
     private Cell[][] cells = new Cell[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];
     /** It also contains a Puzzle with array numbers and isGiven */
     private Puzzle puzzle = new Puzzle();
-    private String currentLevel = "Easy"; //initialize to set level
 
     /** Constructor */
     public GameBoardPanel() {
@@ -42,14 +44,11 @@ public class GameBoardPanel extends JPanel {
 
         // [TODO 3] Allocate a common listener as the ActionEvent listener for all the
         //  Cells (JTextFields)
-        // [TODO 3]
         CellInputListener listener = new CellInputListener();
 
-
         // [TODO 4] Adds this common listener to all editable cells
-        // [TODO 4]
         for (int row = 0; row < SudokuConstants.GRID_SIZE; row++) {
-            for (int col = 0; col < SudokuConstants.GRID_SIZE; col++) {
+            for (int col = 0 ; col < SudokuConstants.GRID_SIZE; col++) {
                 if (cells[row][col].isEditable()) {
                     cells[row][col].addActionListener(listener);   // For all editable rows and cols
                 }
@@ -59,23 +58,18 @@ public class GameBoardPanel extends JPanel {
         super.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
     }
 
-    public void setLevel(String level) { //method to set level
-        this.currentLevel = level;
-    }
-
     /**
      * Generate a new puzzle; and reset the game board of cells based on the puzzle.
      * You can call this method to start a new game.
      */
     public void newGame() {
         // Generate a new puzzle
-        puzzle.newPuzzle(currentLevel);
+        puzzle.newPuzzle(2);
 
         // Initialize all the 9x9 cells, based on the puzzle.
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
             for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
                 cells[row][col].newGame(puzzle.numbers[row][col], puzzle.isGiven[row][col]);
-                cells[row][col].setHighlighted(false); // Reset highlight
             }
         }
     }
@@ -95,112 +89,132 @@ public class GameBoardPanel extends JPanel {
         return true;
     }
 
-    // ADD FITUR UNTUK MENYEMPURNAAN GUI GRID 
-    @Override
-    protected void paintComponent(Graphics g) { // Membuat grid 3x3
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-
-        // Garis tipis untuk grid utama
-        g2d.setColor(Color.BLACK);
-        g2d.setStroke(new BasicStroke(1));
-        for (int i = 1; i < SudokuConstants.GRID_SIZE; i++) {
-            int linePos = i * CELL_SIZE;
-            g2d.drawLine(0, linePos, BOARD_WIDTH, linePos); // Horizontal
-            g2d.drawLine(linePos, 0, linePos, BOARD_HEIGHT); // Vertical
-        }
-
-        // Garis tebal untuk subgrid 3x3
-        g2d.setStroke(new BasicStroke(3));
-        for (int i = 0; i <= SudokuConstants.SUBGRID_SIZE; i++) {
-            int linePos = i * SudokuConstants.SUBGRID_SIZE * CELL_SIZE;
-            g2d.drawLine(0, linePos, BOARD_WIDTH, linePos); // Horizontal
-            g2d.drawLine(linePos, 0, linePos, BOARD_HEIGHT); // Vertical
-        }
-    }
-
     // [TODO 2] Define a Listener Inner Class for all the editable Cells
-   private class CellInputListener implements ActionListener {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-       // Get a reference of the JTextField that triggers this action event
-       Cell sourceCell = (Cell)e.getSource();
-       try {
-        int numberIn = Integer.parseInt(sourceCell.getText()); // Get the number entered
+    private class CellInputListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Get a reference of the JTextField that triggers this action event
+            Cell sourceCell = (Cell)e.getSource();
 
-        // Debugging line to print the entered number
-        System.out.println("You entered " + numberIn);
+            // Retrieve the int entered
+            int numberIn;
+            try {
+                numberIn = Integer.parseInt(sourceCell.getText());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(GameBoardPanel.this, "Please enter a valid number!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                return; // Exit the method if input is invalid
+            }
 
-        /*
-        * [TODO 5] (later - after TODO 3 and 4)
-        * Check the numberIn against sourceCell.number.
-        * Update the cell status sourceCell.status,
-        * and re-paint the cell via sourceCell.paint().
-        */
-        if (numberIn == sourceCell.number) {
-            sourceCell.status = CellStatus.CORRECT_GUESS;
-            sourceCell.setBackground(Color.GREEN);  // Set background to green for correct guess
-            sourceCell.setForeground(Color.BLACK);  // Set text color to black
-        } else {
-            sourceCell.status = CellStatus.WRONG_GUESS;
-            sourceCell.setBackground(Color.RED);  // Set background to red for wrong guess
-            sourceCell.setForeground(Color.WHITE);  // Set text color to white
-        }
-        sourceCell.paint(); // Re-paint the cell based on its updated status
+            // For debugging
+            System.out.println("You entered " + numberIn);
 
-        // Highlight all cells with the same number (except the input cell itself)
-        highlightCells(numberIn, sourceCell);
-        
-        /*
-          * [TODO 6] (later)
-          * Check if the player has solved the puzzle after this move,
-          *   by calling isSolved(). Put up a congratulation JOptionPane, if so.
-          Common colors are defined via constants such as Color.RED, Color.GREEN, Color.BLUE, and etc (But don't use these ugly colors. Design a color theme).
-          */
-           /* setBackground(Color c)  // Set the background color of the component
-            setForeground(Color c)  // Set the text color of the JTextField
-            setFont(Font f)         // Set the font used by the JTextField
-            setHorizontalAlignment(int align);  // align: JTextField.CENTER, JTextField.LEFT, JTextField.RIGHT
-            isEditable():boolean
-            setEditable(boolean b) */
-            // [TODO 6]
-        // Check if the puzzle is solved
-        if (isSolved()) {
-            JOptionPane.showMessageDialog(null, "Congratulations! You solved the puzzle.");
-        } 
-        } catch (NumberFormatException ex) {
-            // Handle invalid input (non-numeric input)
-            JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid number.");
-            }          
-        }
-    }
+            /*
+             * [TODO 5] Check the numberIn against sourceCell.number.
+             * Update the cell status sourceCell.status,
+             * and re-paint the cell via sourceCell.paint().
+             */
+            if (numberIn == sourceCell.number) {
+                sourceCell.status = CellStatus.CORRECT_GUESS;
+            } else {
+                sourceCell.status = CellStatus.WRONG_GUESS;
+            }
+            sourceCell.paint(); // re-paint this cell based on its status
 
-    // Method untuk memberikan highlight sesuai aturan
-    private void highlightCells(int number, Cell excludeCell) {
-        // Reset semua highlight
-        for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
-            for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
-                cells[row][col].setHighlighted(false); // Reset highlight
-                cells[row][col].paint(); // Redraw untuk menghapus highlight
+            /*
+             * [TODO 6] Check if the player has solved the puzzle after this move,
+             *   by calling isSolved(). Put up a congratulation JOptionPane, if so.
+             */
+            if (isSolved()) {
+                JOptionPane.showMessageDialog(GameBoardPanel.this, "Congratulations! You've solved the puzzle!", "Puzzle Solved", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-    
-        // Highlight sel dengan angka yang sama, kecuali sel yang diinput
-        for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
-            for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
-                Cell cell = cells[row][col];
-                if (!cell.getText().isEmpty() && cell != excludeCell) {
-                    try {
-                        int cellValue = Integer.parseInt(cell.getText());
-                        if (cellValue == number) { // Jika angka cocok
-                            cell.setHighlighted(true); // Set highlight
-                            cell.paint(); // Highlight sel
-                        }
-                    } catch (NumberFormatException e) {
-                        // Abaikan jika input tidak valid (tidak seharusnya terjadi)
-                    }
+    }
+
+    public void giveHint(){
+        for(int row =0 ; row<SudokuConstants.GRID_SIZE; row++){
+            for(int col = 0; col<SudokuConstants.GRID_SIZE; col++){
+                if(cells[row][col].status == CellStatus.TO_GUESS){
+                    cells[row][col].setText(String.valueOf(puzzle.numbers[row][col]));
+                    cells[row][col].status = CellStatus.CORRECT_GUESS;
+                    cells[row][col].paint();
+                    JOptionPane.showMessageDialog(this, "Hint given in row " + (row + 1) + ", column " + (col + 1), "Hint", JOptionPane.INFORMATION_MESSAGE);
+                    return;
                 }
             }
         }
+        JOptionPane.showMessageDialog(this, "There's no empty cell to give hint to!", "Hint", JOptionPane.WARNING_MESSAGE);
     }
+
+    public void showCheat(){
+        for(int row =0; row<SudokuConstants.GRID_SIZE;row++){
+            for(int col = 0; col<SudokuConstants.GRID_SIZE;col++){
+                cells[row][col].setText(String.valueOf(puzzle.numbers[row][col]));
+                cells[row][col].status = CellStatus.CORRECT_GUESS;
+                cells[row][col].paint();
+
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Cheat activated! all answer is shown.", "Cheat", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void newGame(int difficultyLevel) {
+        puzzle.newPuzzle(difficultyLevel);
+
+        for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
+            for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
+                cells[row][col].newGame(puzzle.numbers[row][col], puzzle.isGiven[row][col]);
+            }
+        }
+    }
+
+    public void applyTheme(String theme){
+        Color bgGiven, fgGiven, bgToGuess, fgNotGiven;
+        switch(theme){
+            case "Dark Theme":
+                bgGiven = Color.DARK_GRAY;
+                fgGiven = Color.WHITE;
+                bgToGuess = Color.BLACK;
+                fgNotGiven = Color.LIGHT_GRAY;
+                break;
+            case "Pastel Theme":
+                bgGiven = new Color(255, 239, 213);
+                fgGiven = new Color(85, 85, 85);
+                bgToGuess = new Color(245, 222, 179);
+                fgNotGiven = new Color(120, 120, 120);
+                break;
+            case "Peach Theme":
+                bgGiven = new Color(255, 218, 185);
+                fgGiven = new Color(128, 64, 64);
+                bgToGuess = new Color(255, 204, 153);
+                fgNotGiven = new Color(153, 102, 51);
+                break;
+            case "Mint Theme":
+                bgGiven = new Color(152, 251, 152);
+                fgGiven = new Color(34, 139, 34);
+                bgToGuess = new Color(144, 238, 144);
+                fgNotGiven = new Color(0, 100, 0);
+                break;
+            default:
+                bgGiven = BG_GIVEN;
+                fgGiven = FG_GIVEN;
+                bgToGuess = BG_TO_GUESS;
+                fgNotGiven = FG_NOT_GIVEN;
+                break;
+        }
+
+        for(int row = 0; row < SudokuConstants.GRID_SIZE; row++){
+            for(int col = 0; col < SudokuConstants.GRID_SIZE; col++){
+                cells[row][col].applyTheme(bgGiven, fgGiven, bgToGuess, fgNotGiven);
+            }
+        }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        ImageIcon imageIcon = new ImageIcon("path_to_image.jpg"); // Ganti dengan path gambar
+        Image image = imageIcon.getImage();
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+    }
+
 }
