@@ -2,7 +2,6 @@
 //int array numbers and boolean array isGiven. The method newPuzzle() can be used 
 //to generate a new puzzle for a new game.
 
-package sudoku;
 /**
  * The Sudoku number puzzle to be solved
  */

@@ -9,7 +9,6 @@
 */
 
 // An enumeration (enum) called CellStatus is designed to hold the status constants, including GIVEN, CORRECT_GUESS, WRONG_GUESS and TO_GUESS.
-package sudoku;
 /**
  * An enumeration of constants to represent the status
  * of each cell.

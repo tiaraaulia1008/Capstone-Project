@@ -1,5 +1,3 @@
-<<<<<<<< HEAD:sudoku/GameBoardPanel.java
-========
 /**
 * ES234317-Algorithm and Data Structures
 * Semester Ganjil, 2024/2025
@@ -10,8 +8,6 @@
 * 3 - 5026231148 - Tiara Aulia Azadirachta Indica
 */
 
->>>>>>>> ec826f6bcf151fadeb92cb0aa86bc708f5454c2c:sudoku/sudoku/GameBoardPanel.java
-package sudoku;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -29,7 +25,7 @@ public class GameBoardPanel extends JPanel {
     /** The game board composes of 9x9 Cells (customized JTextFields) */
     private Cell[][] cells = new Cell[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];
     /** It also contains a Puzzle with array numbers and isGiven */
-    private Puzzle puzzle = new Puzzle();
+    private Puzzle puzzle = new Puzzle.getInstance();
 
     /** Constructor */
     public GameBoardPanel() {
@@ -45,7 +41,9 @@ public class GameBoardPanel extends JPanel {
 
         // [TODO 3] Allocate a common listener as the ActionEvent listener for all the
         //  Cells (JTextFields)
+        // [TODO 3]
         CellInputListener listener = new CellInputListener();
+
 
         // [TODO 4] Adds this common listener to all editable cells
         // [TODO 4]
@@ -120,31 +118,6 @@ public class GameBoardPanel extends JPanel {
         }
         sourceCell.paint();   // re-paint this cell based on its status
 
-<<<<<<<< HEAD:sudoku/GameBoardPanel.java
-            // Retrieve the int entered
-            int numberIn = Integer.parseInt(sourceCell.getText());
-            // For debugging
-            System.out.println("You entered " + numberIn);
-
-            /*
-             * [TODO 5] (later - after TODO 3 and 4)
-             * Check the numberIn against sourceCell.number.
-             * Update the cell status sourceCell.status,
-             * and re-paint the cell via sourceCell.paint().
-             */
-            //if (numberIn == sourceCell.number) {
-            //   sourceCell.status = CellStatus.CORRECT_GUESS;
-            //} else {
-            //   ......
-            //}
-            //sourceCell.paint();   // re-paint this cell based on its status
-
-            /*
-             * [TODO 6] (later)
-             * Check if the player has solved the puzzle after this move,
-             *   by calling isSolved(). Put up a congratulation JOptionPane, if so.
-             */
-========
          /*
           * [TODO 6] (later)
           * Check if the player has solved the puzzle after this move,
@@ -167,7 +140,6 @@ public class GameBoardPanel extends JPanel {
             } catch (NumberFormatException ex) {
                 System.out.println("Invalid input. Please enter a number.");
             }
->>>>>>>> ec826f6bcf151fadeb92cb0aa86bc708f5454c2c:sudoku/sudoku/GameBoardPanel.java
         }
     }
 }

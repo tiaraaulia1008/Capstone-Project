@@ -9,7 +9,6 @@
 */
 
 //To store the named constants such as GRID_SIZE - to be referred to as SudokuConstants.GRID_SIZE.
-package sudoku;
 /**
  * Define the named constants used in many classes.
  */

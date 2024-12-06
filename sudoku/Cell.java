@@ -8,7 +8,6 @@
 * 3 - 5026231148 - Tiara Aulia Azadirachta Indica
 */
 
-package sudoku;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextField;
