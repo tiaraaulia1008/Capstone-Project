@@ -12,6 +12,8 @@
 /**
  * Define the named constants used in many classes.
  */
+package sudoku;
+
 public class SudokuConstants {
     /** Size of the board */
     public static final int GRID_SIZE = 9;
