@@ -13,6 +13,9 @@
  * An enumeration of constants to represent the status
  * of each cell.
  */
+
+package sudoku;
+
 public enum CellStatus {
     GIVEN,         // clue, no need to guess
     TO_GUESS,      // need to guess - not attempted yet
