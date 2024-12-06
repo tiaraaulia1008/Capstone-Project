@@ -1,5 +1,12 @@
-//customize the JTextField, by creating a subclass called Cell, with additional variables row, col, 
-//number and status, to model each cell of the grid. The Cell has its own methods to paint() itself.
+/**
+* ES234317-Algorithm and Data Structures
+* Semester Ganjil, 2024/2025
+* Group Capstone Project
+* Group #8
+* 1 - 5026231023 - Nadya Luthfiyah Rahma
+* 2 - 5026231094 - Davina Almeira
+* 3 - 5026231148 - Tiara Aulia Azadirachta Indica
+*/
 
 package sudoku;
 import java.awt.Color;

@@ -1,6 +1,12 @@
-//We also customize the JPanel, by creating a subclass called GameBoardPanel, 
-//to hold the grid of 9x9 Cells (JTextFields). Similar to Cell, the GameBoardPanel 
-//has its own methods to paint() itself.
+/**
+* ES234317-Algorithm and Data Structures
+* Semester Ganjil, 2024/2025
+* Group Capstone Project
+* Group #8
+* 1 - 5026231023 - Nadya Luthfiyah Rahma
+* 2 - 5026231094 - Davina Almeira
+* 3 - 5026231148 - Tiara Aulia Azadirachta Indica
+*/
 
 package sudoku;
 import java.awt.*;
@@ -43,7 +49,7 @@ public class GameBoardPanel extends JPanel {
         // [TODO 4] Adds this common listener to all editable cells
         // [TODO 4]
         for (int row = 0; row < SudokuConstants.GRID_SIZE; row++) {
-            for (int col = 0; col < SudokuContants.GRID_SIZE; col++) {
+            for (int col = 0; col < SudokuConstants.GRID_SIZE; col++) {
                 if (cells[row][col].isEditable()) {
                     cells[row][col].addActionListener(listener);   // For all editable rows and cols
                 }
@@ -85,30 +91,34 @@ public class GameBoardPanel extends JPanel {
     }
 
     // [TODO 2] Define a Listener Inner Class for all the editable Cells
-    private class CellInputListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // Get a reference of the JTextField that triggers this action event
-            Cell sourceCell = (Cell)e.getSource();
+   private class CellInputListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       // Get a reference of the JTextField that triggers this action event
+       Cell sourceCell = (Cell)e.getSource();
+       
+       // Retrieve the int entered
+       int numberIn = Integer.parseInt(sourceCell.getText());
+       // For debugging
+       System.out.println("You entered " + numberIn);
 
-            // Retrieve the int entered
-            try {
-                int numberIn = Integer.parseInt(sourceCell.getText());
-                // For debugging
-                System.out.println("You entered " + numberIn);
-            }
-            /*
-             * [TODO 5] (later - after TODO 3 and 4)
-             * Check the numberIn against sourceCell.number.
-             * Update the cell status sourceCell.status,
-             * and re-paint the cell via sourceCell.paint().
-             */
-            if (numberIn == sourceCell.number) {
-               sourceCell.status = CellStatus.CORRECT_GUESS;
-            } else {
-               soureCell.status = CellStatus.WRONG_GUESS;
-            }
-            sourceCell.paint();   // re-paint this cell based on its status
+       /*
+        * [TODO 5] (later - after TODO 3 and 4)
+        * Check the numberIn against sourceCell.number.
+        * Update the cell status sourceCell.status,
+        * and re-paint the cell via sourceCell.paint().
+        */
+        if (numberIn == sourceCell.number) {
+            sourceCell.status = CellStatus.CORRECT_GUESS;
+            sourceCell.setBackground(Color.GREEN);  // Set background to green for correct guess
+            sourceCell.setForeground(Color.BLACK);  // Set text color to black
+        } else {
+            sourceCell.status = CellStatus.WRONG_GUESS;
+            sourceCell.setBackground(Color.RED);  // Set background to red for wrong guess
+            sourceCell.setForeground(Color.WHITE);  // Set text color to white
+        }
+        sourceCell.paint();   // re-paint this cell based on its status
+
          /*
           * [TODO 6] (later)
           * Check if the player has solved the puzzle after this move,
@@ -125,8 +135,12 @@ public class GameBoardPanel extends JPanel {
             if(isSolved()) {
                 JOptionPane.showMessageDialog(null, "Congratulation!");
             }
-        } catch(NumberFormatException ex){
-            System.out.println("Invalid input. Please enter a number.");
+            try {
+                String input = "abc";
+                Integer.parseInt(input);  // Ini akan melempar NumberFormatException
+            } catch (NumberFormatException ex) {
+                System.out.println("Invalid input. Please enter a number.");
+            }
         }
     }
 }
