@@ -8,12 +8,9 @@
 * 3 - 5026231148 - Tiara Aulia Azadirachta Indica
 */
 
-package sudoku;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-import static sudoku.Cell.*;
 
 public class GameBoardPanel extends JPanel {
     private static final long serialVersionUID = 1L;  // to prevent serial warning
@@ -29,9 +26,13 @@ public class GameBoardPanel extends JPanel {
     private Cell[][] cells = new Cell[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];
     /** It also contains a Puzzle with array numbers and isGiven */
     private Puzzle puzzle = new Puzzle();
+    private String currentLevel = "Easy";
+
+    private SudokuMain mainFrame; // Referensi ke frame utama
 
     /** Constructor */
-    public GameBoardPanel() {
+    public GameBoardPanel(SudokuMain mainFrame) { 
+        this.mainFrame = mainFrame; 
         super.setLayout(new GridLayout(SudokuConstants.GRID_SIZE, SudokuConstants.GRID_SIZE));  // JPanel
 
         // Allocate the 2D array of Cell, and added into JPanel.
@@ -58,13 +59,22 @@ public class GameBoardPanel extends JPanel {
         super.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
     }
 
+    public void setLevel(String level) {
+        this.currentLevel = level;
+    }
+
+    // Method to get the current game level
+    public String getLevel() { //add getter
+        return currentLevel;
+    }
+
     /**
      * Generate a new puzzle; and reset the game board of cells based on the puzzle.
      * You can call this method to start a new game.
      */
     public void newGame() {
         // Generate a new puzzle
-        puzzle.newPuzzle(2);
+        puzzle.newPuzzle(currentLevel);
 
         // Initialize all the 9x9 cells, based on the puzzle.
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
@@ -100,6 +110,7 @@ public class GameBoardPanel extends JPanel {
             int numberIn;
             try {
                 numberIn = Integer.parseInt(sourceCell.getText());
+                
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(GameBoardPanel.this, "Please enter a valid number!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                 return; // Exit the method if input is invalid
@@ -119,13 +130,15 @@ public class GameBoardPanel extends JPanel {
                 sourceCell.status = CellStatus.WRONG_GUESS;
             }
             sourceCell.paint(); // re-paint this cell based on its status
+            // Highlight semua angka yang sama (kecuali sel yang diinput)
+            highlightCells(numberIn, sourceCell);
 
             /*
              * [TODO 6] Check if the player has solved the puzzle after this move,
              *   by calling isSolved(). Put up a congratulation JOptionPane, if so.
              */
             if (isSolved()) {
-                JOptionPane.showMessageDialog(GameBoardPanel.this, "Congratulations! You've solved the puzzle!", "Puzzle Solved", JOptionPane.INFORMATION_MESSAGE);
+                mainFrame.checkGameComplete(); // Beri tahu SudokuMain bahwa game selesai
             }
         }
     }
@@ -157,17 +170,7 @@ public class GameBoardPanel extends JPanel {
         JOptionPane.showMessageDialog(this, "Cheat activated! all answer is shown.", "Cheat", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public void newGame(int difficultyLevel) {
-        puzzle.newPuzzle(difficultyLevel);
-
-        for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
-            for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
-                cells[row][col].newGame(puzzle.numbers[row][col], puzzle.isGiven[row][col]);
-            }
-        }
-    }
-
-    public void applyTheme(String theme){
+    /* public void applyTheme(String theme){
         Color bgGiven, fgGiven, bgToGuess, fgNotGiven;
         switch(theme){
             case "Dark Theme":
@@ -207,14 +210,66 @@ public class GameBoardPanel extends JPanel {
                 cells[row][col].applyTheme(bgGiven, fgGiven, bgToGuess, fgNotGiven);
             }
         }
-    }
+    } 
 
-    @Override
+    /* @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         ImageIcon imageIcon = new ImageIcon("path_to_image.jpg"); // Ganti dengan path gambar
         Image image = imageIcon.getImage();
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+    } */
+
+    @Override
+    protected void paintComponent(Graphics g) { // Membuat grid 3x3
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+
+        // Garis tipis untuk grid utama
+        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(1));
+        for (int i = 1; i < SudokuConstants.GRID_SIZE; i++) {
+            int linePos = i * CELL_SIZE;
+            g2d.drawLine(0, linePos, BOARD_WIDTH, linePos); // Horizontal
+            g2d.drawLine(linePos, 0, linePos, BOARD_HEIGHT); // Vertical
+        }
+
+        // Garis tebal untuk subgrid 3x3
+        g2d.setStroke(new BasicStroke(3));
+        for (int i = 0; i <= SudokuConstants.SUBGRID_SIZE; i++) {
+            int linePos = i * SudokuConstants.SUBGRID_SIZE * CELL_SIZE;
+            g2d.drawLine(0, linePos, BOARD_WIDTH, linePos); // Horizontal
+            g2d.drawLine(linePos, 0, linePos, BOARD_HEIGHT); // Vertical
+        }
+    }
+
+    // Method untuk memberikan highlight sesuai aturan
+    private void highlightCells(int number, Cell excludeCell) {
+        // Reset semua highlight
+        for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
+            for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
+                cells[row][col].setHighlighted(false); // Reset highlight
+                cells[row][col].paint(); // Redraw untuk menghapus highlight
+            }
+        }
+    
+        // Highlight sel dengan angka yang sama, kecuali sel yang diinput
+        for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
+            for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
+                Cell cell = cells[row][col];
+                if (!cell.getText().isEmpty() && cell != excludeCell) {
+                    try {
+                        int cellValue = Integer.parseInt(cell.getText());
+                        if (cellValue == number) { // Jika angka cocok
+                            cell.setHighlighted(true); // Set highlight
+                            cell.paint(); // Highlight sel
+                        }
+                    } catch (NumberFormatException e) {
+                        // Abaikan jika input tidak valid (tidak seharusnya terjadi)
+                    }
+                }
+            }
+        }
     }
 
 }
