@@ -170,46 +170,38 @@ public class GameBoardPanel extends JPanel {
         JOptionPane.showMessageDialog(this, "Cheat activated! all answer is shown.", "Cheat", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    /* public void applyTheme(String theme){
+    public void applyTheme(String theme) {
         Color bgGiven, fgGiven, bgToGuess, fgNotGiven;
-        switch(theme){
-            case "Dark Theme":
-                bgGiven = Color.DARK_GRAY;
-                fgGiven = Color.WHITE;
-                bgToGuess = Color.BLACK;
-                fgNotGiven = Color.LIGHT_GRAY;
-                break;
-            case "Pastel Theme":
-                bgGiven = new Color(255, 239, 213);
-                fgGiven = new Color(85, 85, 85);
-                bgToGuess = new Color(245, 222, 179);
-                fgNotGiven = new Color(120, 120, 120);
-                break;
-            case "Peach Theme":
-                bgGiven = new Color(255, 218, 185);
-                fgGiven = new Color(128, 64, 64);
-                bgToGuess = new Color(255, 204, 153);
-                fgNotGiven = new Color(153, 102, 51);
-                break;
-            case "Mint Theme":
-                bgGiven = new Color(152, 251, 152);
-                fgGiven = new Color(34, 139, 34);
-                bgToGuess = new Color(144, 238, 144);
-                fgNotGiven = new Color(0, 100, 0);
-                break;
-            default:
-                bgGiven = BG_GIVEN;
-                fgGiven = FG_GIVEN;
-                bgToGuess = BG_TO_GUESS;
-                fgNotGiven = FG_NOT_GIVEN;
-                break;
+
+        if (theme.equals("Peach Theme")) {
+            bgGiven = new Color(244, 227, 233);  // Light peach background for given cells
+            fgGiven = Color.BLACK;
+            bgToGuess = new Color(244, 176, 186);  // Pinkish background for guess cells
+            fgNotGiven = Color.GRAY;
+        } else if (theme.equals("Mint Theme")) {
+            bgGiven = new Color(211, 241, 211);  // Light mint background for given cells
+            fgGiven = Color.BLACK;
+            bgToGuess = new Color(149, 216, 183);  // Minty background for guess cells
+            fgNotGiven = Color.GRAY;
+        } else {
+            // Default theme or fallback colors
+            bgGiven = Color.WHITE;
+            fgGiven = Color.BLACK;
+            bgToGuess = Color.YELLOW;
+            fgNotGiven = Color.GRAY;
         }
 
-        for(int row = 0; row < SudokuConstants.GRID_SIZE; row++){
-            for(int col = 0; col < SudokuConstants.GRID_SIZE; col++){
+        // Apply theme to all cells in the board
+        for (int row = 0; row < SudokuConstants.GRID_SIZE; row++) {
+            for (int col = 0; col < SudokuConstants.GRID_SIZE; col++) {
                 cells[row][col].applyTheme(bgGiven, fgGiven, bgToGuess, fgNotGiven);
             }
         }
+        System.out.println("Applying theme: " + theme);
+
+        // Force the panel to revalidate and repaint after applying the theme
+        revalidate();  // Ensures the layout is updated
+        repaint();     // Redraws the panel with the new theme
     } 
 
     /* @Override
@@ -223,6 +215,10 @@ public class GameBoardPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) { // Membuat grid 3x3
         super.paintComponent(g);
+        super.paintComponent(g);
+        if(backgroundImage != null){
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        
         Graphics2D g2d = (Graphics2D) g;
 
         // Garis tipis untuk grid utama
@@ -240,6 +236,17 @@ public class GameBoardPanel extends JPanel {
             int linePos = i * SudokuConstants.SUBGRID_SIZE * CELL_SIZE;
             g2d.drawLine(0, linePos, BOARD_WIDTH, linePos); // Horizontal
             g2d.drawLine(linePos, 0, linePos, BOARD_HEIGHT); // Vertical
+        }
+    }
+
+        //method image background
+        public void loadImage(){
+        //menggunakan jalur gambar relatif
+        try{
+            backgroundImage = new ImageIcon("C:/absolute/path/to/night_bg.jpeg").getImage();
+        }catch (Exception e){
+            System.out.println("Resource URL: " + getClass().getResource("src/night_bg.jpeg"));
+            System.err.println("Failed to load image: " + e.getMessage());
         }
     }
 
