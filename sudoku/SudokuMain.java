@@ -65,6 +65,12 @@ public class SudokuMain extends JFrame {
 
     setJMenuBar(menuBar);
 
+    // Action Listeners untuk menu
+    newGameItem.addActionListener(e -> board.newGame());
+    resetGameItem.addActionListener(e -> board.newGame());
+    difficultyItem.addActionListener(e -> showDifficultyDialog());
+    aboutItem.addActionListener(e -> showAboutDialog());
+
     // Timer panel setup
     JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     timerLabel.setHorizontalAlignment(SwingConstants.LEFT);
