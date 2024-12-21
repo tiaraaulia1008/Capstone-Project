@@ -51,11 +51,15 @@ public class Cell extends JTextField {
     public void newGame(int number, boolean isGiven) {
         this.number = number;
         status = isGiven ? CellStatus.GIVEN : CellStatus.TO_GUESS;
+        applyTheme(BG_GIVEN, FG_GIVEN, BG_TO_GUESS, FG_NOT_GIVEN);
         paint();    // paint itself
     }
 
     /** This Cell (JTextField) paints itself based on its status */
     public void paint() {
+         Color bgColor = BG_GIVEN;  // Default background color
+        Color fgColor = FG_GIVEN;  // Default foreground color
+        
         if (status == CellStatus.GIVEN) {
             // Inherited from JTextField: Set display properties
             super.setText(number + "");
@@ -78,6 +82,35 @@ public class Cell extends JTextField {
         if (isHighlighted) {
             super.setBackground(new Color(173, 216, 230)); // Highlight overlay dengan warna biru muda
         }
+        super.setBackground(bgColor);
+        super.setForeground(fgColor);
+        super.repaint();
+    }
+
+    /** Set the value and update the background and foreground color based on the cell's value */
+    public void setValue(int value) {
+        this.number = value;
+        if (value == 0) {
+            status = CellStatus.TO_GUESS;
+        } else {
+            status = CellStatus.GIVEN;
+        }
+        paint();  // Update the cell's appearance
+    }
+
+    public void applyTheme(Color bgGiven, Color fgGiven, Color bgToGuess, Color fgNotGiven) {
+        if (this.isEditable()) {
+            setBackground(bgGiven);
+            setForeground(fgGiven);
+        } else {
+            setBackground(bgToGuess);
+            setForeground(fgNotGiven);
+        }
+        System.out.println("Cell [" + row + "][" + col + "] - bg: " + bgGiven + ", fg: " + fgGiven);
+
+
+        // Trigger a repaint to reflect changes
+        repaint();
     }
 
     // Method to highlight the cell when value matches
