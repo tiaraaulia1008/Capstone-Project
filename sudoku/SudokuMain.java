@@ -272,8 +272,14 @@ public void checkGameComplete() {
 }
 
 private void showAboutDialog() {
+    String message = "Sudoku Game\n" +
+                     "Created by:\n" +
+                     "  * 5026231023 - Nadya Luthfiyah Rahma\n" +
+                     "  * 5026231094 - Davina Almeira\n" +
+                     "  * 5026231148 - Tiara Aulia Azadirachta Indica";
+    
     JOptionPane.showMessageDialog(this, 
-        "Sudoku Game\nCreated by [Your Name]", 
+        message, 
         "About", 
         JOptionPane.INFORMATION_MESSAGE);
 }
