@@ -23,6 +23,10 @@ public class SudokuMain extends JFrame {
    JButton pauseButton = new JButton("Pause");
    JButton resumeButton = new JButton("Resume");
    JPanel buttonPanel = new JPanel(new FlowLayout());
+   JButton btnHint = new JButton("Hint");
+    JButton btnCheat = new JButton("Cheat");
+    JButton peachThmBtn = new JButton("Peach Theme");
+    JButton mintThmBtn = new JButton("Mint Theme");
    JComboBox<String> levelSelector = new JComboBox<>(new String[]{"Easy", "Intermediate", "Difficult"}); //set level
    private Timer timer; // Timer untuk menghitung waktu
    private int elapsedSeconds = 0; // Total waktu berjalan
@@ -70,6 +74,8 @@ public class SudokuMain extends JFrame {
     resetGameItem.addActionListener(e -> board.newGame());
     difficultyItem.addActionListener(e -> showDifficultyDialog());
     aboutItem.addActionListener(e -> showAboutDialog());
+    btnHint.addActionListener(e -> board.giveHint());
+    btnCheat.addActionListener(e -> board.showCheat());
 
     // Timer panel setup
     JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -110,6 +116,37 @@ public class SudokuMain extends JFrame {
     bottomPanel.add(statusBar, BorderLayout.SOUTH);
 
     cp.add(bottomPanel, BorderLayout.SOUTH);
+
+    JPanel hintCheatPanel = new JPanel(new FlowLayout());
+    hintCheatPanel.add(btnHint);
+    hintCheatPanel.add(btnCheat);
+    bottomPanel.add(hintCheatPanel, BorderLayout.CENTER);
+
+    JPanel thmPanel = new JPanel();
+    thmPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+    thmPanel.add(peachThmBtn);
+    thmPanel.add(mintThmBtn);
+
+    cp.add(thmPanel, BorderLayout.NORTH);
+
+    // Inside your ActionListener for theme buttons:
+    peachThmBtn.addActionListener(e -> {
+        System.out.println("Peach Theme Selected");
+        board.applyTheme("Peach Theme");
+        board.revalidate();   // Force the board to update
+        board.repaint();      // Force the board to refresh visually
+    });
+
+    mintThmBtn.addActionListener(e -> {
+        System.out.println("Mint Theme Selected");
+        board.applyTheme("Mint Theme");
+        board.revalidate();   // Force the board to update
+        board.repaint();      // Force the board to refresh visually
+    });
+    pack();
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setTitle("Sudoku");
+    setVisible(true);
 
     // Timer logic
     timer = new Timer(1000, e -> {

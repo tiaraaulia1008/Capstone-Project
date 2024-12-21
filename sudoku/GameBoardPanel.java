@@ -21,6 +21,8 @@ public class GameBoardPanel extends JPanel {
     public static final int BOARD_HEIGHT = CELL_SIZE * SudokuConstants.GRID_SIZE;
     // Board width/height in pixels
 
+    private Image backgroundImage;
+
     // Define properties
     /** The game board composes of 9x9 Cells (customized JTextFields) */
     private Cell[][] cells = new Cell[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];
@@ -271,5 +273,50 @@ public class GameBoardPanel extends JPanel {
             }
         }
     }
+
+    public void applyTheme(String theme) {
+        Color bgGiven, fgGiven, bgToGuess, fgNotGiven;
+
+        if (theme.equals("Peach Theme")) {
+            bgGiven = new Color(244, 227, 233);  // Light peach background for given cells
+            fgGiven = Color.BLACK;
+            bgToGuess = new Color(244, 176, 186);  // Pinkish background for guess cells
+            fgNotGiven = Color.GRAY;
+        } else if (theme.equals("Mint Theme")) {
+            bgGiven = new Color(211, 241, 211);  // Light mint background for given cells
+            fgGiven = Color.BLACK;
+            bgToGuess = new Color(149, 216, 183);  // Minty background for guess cells
+            fgNotGiven = Color.GRAY;
+        } else {
+            // Default theme or fallback colors
+            bgGiven = Color.WHITE;
+            fgGiven = Color.BLACK;
+            bgToGuess = Color.YELLOW;
+            fgNotGiven = Color.GRAY;
+        }
+
+        // Apply theme to all cells in the board
+        for (int row = 0; row < SudokuConstants.GRID_SIZE; row++) {
+            for (int col = 0; col < SudokuConstants.GRID_SIZE; col++) {
+                cells[row][col].applyTheme(bgGiven, fgGiven, bgToGuess, fgNotGiven);
+            }
+        }
+        System.out.println("Applying theme: " + theme);
+
+        // Force the panel to revalidate and repaint after applying the theme
+        revalidate();  // Ensures the layout is updated
+        repaint();     // Redraws the panel with the new theme
+    }
+
+    public void loadImage(){
+        //menggunakan jalur gambar relatif
+        try{
+            backgroundImage = new ImageIcon("C:/absolute/path/to/night_bg.jpeg").getImage();
+        }catch (Exception e){
+            System.out.println("Resource URL: " + getClass().getResource("src/night_bg.jpeg"));
+            System.err.println("Failed to load image: " + e.getMessage());
+        }
+    }
+    
 
 }
