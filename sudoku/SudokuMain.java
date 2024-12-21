@@ -162,7 +162,7 @@ private void handlePause() {
     dialog.addWindowListener(new java.awt.event.WindowAdapter() {
         @Override
         public void windowClosing(java.awt.event.WindowEvent e) {
-            handlePause();
+            isPaused = false;
         }
     });
 
@@ -196,6 +196,7 @@ private void startNewGame() {
     timerLabel.setText("Time: 00:00:00");
     timer.restart();
     updateStatusBar();
+    
 }
 
 private void updateStatusBar() {
