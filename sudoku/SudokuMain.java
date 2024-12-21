@@ -22,6 +22,10 @@ public class SudokuMain extends JFrame {
    JPanel timerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
    JButton pauseButton = new JButton("Pause");
    JButton resumeButton = new JButton("Resume");
+   JButton btnHint = new JButton("Hint");
+   JButton btnCheat = new JButton("Cheat");
+   JButton peachThmBtn = new JButton("Peach Theme");
+   JButton mintThmBtn = new JButton("Mint Theme");
    JPanel buttonPanel = new JPanel(new FlowLayout());
    JComboBox<String> levelSelector = new JComboBox<>(new String[]{"Easy", "Intermediate", "Difficult"}); //set level
    private Timer timer; // Timer untuk menghitung waktu
@@ -64,6 +68,32 @@ public class SudokuMain extends JFrame {
     menuBar.add(helpMenu);
 
     setJMenuBar(menuBar);
+
+      JPanel thmPanel = new JPanel();
+        thmPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        thmPanel.add(peachThmBtn);
+        thmPanel.add(mintThmBtn);
+
+        cp.add(thmPanel, BorderLayout.NORTH);
+      
+       // Inside your ActionListener for theme buttons:
+        peachThmBtn.addActionListener(e -> {
+            System.out.println("Peach Theme Selected");
+            board.applyTheme("Peach Theme");
+            board.revalidate();   // Force the board to update
+            board.repaint();      // Force the board to refresh visually
+        });
+
+        mintThmBtn.addActionListener(e -> {
+            System.out.println("Mint Theme Selected");
+            board.applyTheme("Mint Theme");
+            board.revalidate();   // Force the board to update
+            board.repaint();      // Force the board to refresh visually
+        });
+        pack();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Sudoku");
+        setVisible(true);
 
     // Timer panel setup
     JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -196,6 +226,35 @@ private void startNewGame() {
     timerLabel.setText("Time: 00:00:00");
     timer.restart();
     updateStatusBar();
+
+        Container cp = getContentPane();
+        cp.setLayout(new BorderLayout());
+
+        // Add the theme panel to the top again
+        JPanel thmPanel = new JPanel();
+        thmPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        thmPanel.add(peachThmBtn);
+        thmPanel.add(mintThmBtn);
+        cp.add(thmPanel, BorderLayout.NORTH); // Keep the theme buttons at the top
+
+        // Add game board
+        cp.add(board, BorderLayout.CENTER);
+
+        JPanel southPanel = new JPanel();
+        southPanel.add(btnHint);
+        southPanel.add(btnCheat);
+
+        cp.add(board, BorderLayout.CENTER);
+        cp.add(southPanel, BorderLayout.SOUTH);
+
+        // Add action listeners for game controls
+        btnHint.addActionListener(e -> board.giveHint());
+        btnCheat.addActionListener(e -> board.showCheat());
+
+
+        revalidate();
+        repaint();
+   
     
 }
 
