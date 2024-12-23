@@ -12,7 +12,6 @@
 /**
  * Define the named constants used in many classes.
  */
-package sudoku;
 
 public class SudokuConstants {
     /** Size of the board */

@@ -14,7 +14,6 @@
  * of each cell.
  */
 
-package sudoku;
 
 public enum CellStatus {
     GIVEN,         // clue, no need to guess

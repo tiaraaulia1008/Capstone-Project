@@ -6,7 +6,6 @@
  * The Sudoku number puzzle to be solved
  */
 
-package sudoku;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

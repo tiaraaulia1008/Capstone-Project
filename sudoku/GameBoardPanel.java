@@ -8,13 +8,10 @@
  * 3 - 5026231148 - Tiara Aulia Azadirachta Indica
  */
 
-package sudoku;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.ImageIcon;
-
-import static sudoku.Cell.*;
 
 public class GameBoardPanel extends JPanel {
     private static final long serialVersionUID = 1L;  // to prevent serial warning
