@@ -1,352 +1,358 @@
 /**
-* ES234317-Algorithm and Data Structures
-* Semester Ganjil, 2024/2025
-* Group Capstone Project
-* Group #8
-* 1 - 5026231023 - Nadya Luthfiyah Rahma
-* 2 - 5026231094 - Davina Almeira
-* 3 - 5026231148 - Tiara Aulia Azadirachta Indica
-*/
+ * ES234317-Algorithm and Data Structures
+ * Semester Ganjil, 2024/2025
+ * Group Capstone Project
+ * Group #8
+ * 1 - 5026231023 - Nadya Luthfiyah Rahma
+ * 2 - 5026231094 - Davina Almeira
+ * 3 - 5026231148 - Tiara Aulia Azadirachta Indica
+ */
 
 import java.awt.*;
 import javax.swing.*;
-/**
- * The main Sudoku program
- */
+
 public class SudokuMain extends JFrame {
    private static final long serialVersionUID = 1L;  // to prevent serial warning
 
    // private variables
    GameBoardPanel board = new GameBoardPanel(this); // 'this' adalah referensi ke SudokuMain
    JButton btnNewGame = new JButton("New Game");
-   JPanel timerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+   JPanel timerPanel = new JPanel(new BorderLayout()); // Timer panel setup
    JButton pauseButton = new JButton("Pause");
    JButton resumeButton = new JButton("Resume");
    JPanel buttonPanel = new JPanel(new FlowLayout());
    JButton btnHint = new JButton("Hint");
-    JButton btnCheat = new JButton("Cheat");
-    JButton peachThmBtn = new JButton("Peach Theme");
-    JButton mintThmBtn = new JButton("Mint Theme");
-   JComboBox<String> levelSelector = new JComboBox<>(new String[]{"Easy", "Intermediate", "Difficult"}); //set level
+   JButton btnCheat = new JButton("Cheat");
+   JButton peachThmBtn = new JButton("Peach Theme");
+   JButton mintThmBtn = new JButton("Mint Theme");
+   JComboBox<String> levelSelector = new JComboBox<>(new String[]{"Easy", "Intermediate", "Difficult"}); // set level
    private Timer timer; // Timer untuk menghitung waktu
    private int elapsedSeconds = 0; // Total waktu berjalan
    private boolean isPaused = false; // Status apakah timer sedang berhenti
    private boolean gamePaused = false;
    private String playerName = "Player"; // Default player name
-    private int highScore = Integer.MAX_VALUE; // Default high score
+   private int highScore = Integer.MAX_VALUE; // Default high score
    private JLabel statusBar = new JLabel("Welcome to Sudoku!"); // Status bar
    private JLabel timerLabel = new JLabel("Time: 00:00:00 "); // Timer label
    private JLabel highScoreLabel = new JLabel("Highscore: --:--:--");
 
    public SudokuMain() {
-    Container cp = getContentPane();
-    cp.setLayout(new BorderLayout());
+      Container cp = getContentPane();
+      cp.setLayout(new BorderLayout());
 
-    // Show Welcome Screen
-    showWelcomeScreen();
+      // Show Welcome Screen
+      showWelcomeScreen();
 
-    // Game Board in center
-    cp.add(board, BorderLayout.CENTER);
+      // Initialize sound effects
+      SoundEffect.BACKSOUND.loop();
 
-    // Menu Bar setup
-    JMenuBar menuBar = new JMenuBar();
-    JMenu fileMenu = new JMenu("File");
-    JMenuItem newGameItem = new JMenuItem("New Game");
-    JMenuItem resetGameItem = new JMenuItem("Reset Game");
-    fileMenu.add(newGameItem);
-    fileMenu.add(resetGameItem);
-    menuBar.add(fileMenu);
 
-    JMenu optionsMenu = new JMenu("Options");
-    JMenuItem difficultyItem = new JMenuItem("Set Difficulty");
-    optionsMenu.add(difficultyItem);
-    menuBar.add(optionsMenu);
+      // Game Board in center
+      cp.add(board, BorderLayout.CENTER);
 
-    JMenu helpMenu = new JMenu("Help");
-    JMenuItem aboutItem = new JMenuItem("About");
-    helpMenu.add(aboutItem);
-    menuBar.add(helpMenu);
+      // Menu Bar setup
+      JMenuBar menuBar = new JMenuBar();
+      JMenu fileMenu = new JMenu("File");
+      JMenuItem newGameItem = new JMenuItem("New Game");
+      JMenuItem resetGameItem = new JMenuItem("Reset Game");
+      fileMenu.add(newGameItem);
+      fileMenu.add(resetGameItem);
+      menuBar.add(fileMenu);
 
-    setJMenuBar(menuBar);
+      JMenu optionsMenu = new JMenu("Options");
+      JMenuItem difficultyItem = new JMenuItem("Set Difficulty");
+      optionsMenu.add(difficultyItem);
+      menuBar.add(optionsMenu);
 
-    // Action Listeners untuk menu
-    newGameItem.addActionListener(e -> board.newGame());
-    resetGameItem.addActionListener(e -> board.newGame());
-    difficultyItem.addActionListener(e -> showDifficultyDialog());
-    aboutItem.addActionListener(e -> showAboutDialog());
-    btnHint.addActionListener(e -> board.giveHint());
-    btnCheat.addActionListener(e -> board.showCheat());
+      JMenu helpMenu = new JMenu("Help");
+      JMenuItem aboutItem = new JMenuItem("About");
+      helpMenu.add(aboutItem);
+      menuBar.add(helpMenu);
 
-    // Timer panel setup
-    JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    timerLabel.setHorizontalAlignment(SwingConstants.LEFT);
-    topPanel.add(timerLabel);
-    topPanel.add(pauseButton);  // Add Pause button next to timer label
-    cp.add(topPanel, BorderLayout.NORTH);
+      setJMenuBar(menuBar);
 
-    // Control panel setup
-    JPanel controlPanel = new JPanel(new FlowLayout());
-    levelSelector.addActionListener(e -> {
-        String selectedLevel = (String) levelSelector.getSelectedItem();
-        board.setLevel(selectedLevel);
-        board.newGame();
-        updateStatusBar();
-    });
+      // Action Listeners untuk menu
+      newGameItem.addActionListener(e -> board.newGame());
+      resetGameItem.addActionListener(e -> board.newGame());
+      difficultyItem.addActionListener(e -> showDifficultyDialog());
+      aboutItem.addActionListener(e -> showAboutDialog());
+      btnHint.addActionListener(e -> board.giveHint());
+      btnCheat.addActionListener(e -> board.showCheat());
 
-    btnNewGame.addActionListener(e -> {
-        board.newGame();
-        updateStatusBar();
-        resetTimer();
-    });
+      // Timer panel setup
+      timerLabel.setHorizontalAlignment(SwingConstants.LEFT);
+      timerPanel.add(timerLabel, BorderLayout.EAST); // Timer di sebelah kanan
 
-    controlPanel.add(new JLabel("Select Level:"));
-    controlPanel.add(levelSelector);
-    controlPanel.add(btnNewGame);
+      // Theme panel setup
+      JPanel themePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Panel untuk tema
+      themePanel.add(peachThmBtn);
+      themePanel.add(mintThmBtn);
 
-    // Highscore panel
-    JPanel highScorePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-    highScorePanel.add(highScoreLabel);
-    cp.add(highScorePanel, BorderLayout.EAST);
+      // Gabungkan timer dan theme panel ke topPanel
+      JPanel topPanel = new JPanel(new BorderLayout());
+      topPanel.add(themePanel, BorderLayout.WEST);  // Theme di sebelah kiri
+      topPanel.add(timerPanel, BorderLayout.EAST);   // Timer di sebelah kanan
 
-    // Combine status bar and control panel
-    JPanel bottomPanel = new JPanel(new BorderLayout());
-    bottomPanel.add(controlPanel, BorderLayout.CENTER);
+      cp.add(topPanel, BorderLayout.NORTH);
 
-    statusBar.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-    bottomPanel.add(statusBar, BorderLayout.SOUTH);
+      // Control panel setup
+      JPanel controlPanel = new JPanel(new FlowLayout());
+      levelSelector.addActionListener(e -> {
+         String selectedLevel = (String) levelSelector.getSelectedItem();
+         board.setLevel(selectedLevel);
+         board.newGame();
+         updateStatusBar();
+      });
 
-    cp.add(bottomPanel, BorderLayout.SOUTH);
+      btnNewGame.addActionListener(e -> {
+         board.newGame();
+         updateStatusBar();
+         resetTimer();
+      });
 
-    JPanel hintCheatPanel = new JPanel(new FlowLayout());
-    hintCheatPanel.add(btnHint);
-    hintCheatPanel.add(btnCheat);
-    bottomPanel.add(hintCheatPanel, BorderLayout.CENTER);
+      controlPanel.add(new JLabel("Select Level:"));
+      controlPanel.add(levelSelector);
+      controlPanel.add(btnNewGame);
 
-    JPanel thmPanel = new JPanel();
-    thmPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-    thmPanel.add(peachThmBtn);
-    thmPanel.add(mintThmBtn);
+      // Highscore panel
+      JPanel highScorePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+      highScorePanel.add(highScoreLabel);
+      cp.add(highScorePanel, BorderLayout.EAST);
 
-    cp.add(thmPanel, BorderLayout.NORTH);
+      // Combine status bar and control panel
+      JPanel bottomPanel = new JPanel(new BorderLayout());
+      bottomPanel.add(controlPanel, BorderLayout.CENTER);
 
-    // Inside your ActionListener for theme buttons:
-    peachThmBtn.addActionListener(e -> {
-        System.out.println("Peach Theme Selected");
-        board.applyTheme("Peach Theme");
-        board.revalidate();   // Force the board to update
-        board.repaint();      // Force the board to refresh visually
-    });
+      statusBar.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+      bottomPanel.add(statusBar, BorderLayout.SOUTH);
 
-    mintThmBtn.addActionListener(e -> {
-        System.out.println("Mint Theme Selected");
-        board.applyTheme("Mint Theme");
-        board.revalidate();   // Force the board to update
-        board.repaint();      // Force the board to refresh visually
-    });
-    pack();
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setTitle("Sudoku");
-    setVisible(true);
+      cp.add(bottomPanel, BorderLayout.SOUTH);
 
-    // Timer logic
-    timer = new Timer(1000, e -> {
-        if (!isPaused) {
+      JPanel hintCheatPanel = new JPanel(new FlowLayout());
+      hintCheatPanel.add(btnHint);
+      hintCheatPanel.add(btnCheat);
+      bottomPanel.add(hintCheatPanel, BorderLayout.CENTER);
+
+      cp.add(topPanel, BorderLayout.NORTH); // Add again the topPanel to ensure layout consistency
+
+      // Inside your ActionListener for theme buttons:
+      peachThmBtn.addActionListener(e -> {
+         System.out.println("Peach Theme Selected");
+         board.applyTheme("Peach Theme");
+         board.revalidate();   // Force the board to update
+         board.repaint();      // Force the board to refresh visually
+      });
+
+      mintThmBtn.addActionListener(e -> {
+         System.out.println("Mint Theme Selected");
+         board.applyTheme("Mint Theme");
+         board.revalidate();   // Force the board to update
+         board.repaint();      // Force the board to refresh visually
+      });
+
+      pack();
+      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      setTitle("Sudoku");
+      setVisible(true);
+
+      // Timer logic
+      timer = new Timer(1000, e -> {
+         if (!isPaused) {
             elapsedSeconds++;
             timerLabel.setText("Time: " + formatTime(elapsedSeconds));
-        }
-    });
-    timer.start();
+         }
+      });
+      timer.start();
 
-    // Pause button logic
-    pauseButton.addActionListener(e -> handlePause());
+      // Pause button logic
+      pauseButton.addActionListener(e -> handlePause());
 
-    // Initialize the game board
-    board.newGame();
+      // Initialize the game board
+      board.newGame();
 
-    pack();
-    setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-    addWindowListener(new java.awt.event.WindowAdapter() {
-        @Override
-        public void windowClosing(java.awt.event.WindowEvent e) {
+      pack();
+      setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+      addWindowListener(new java.awt.event.WindowAdapter() {
+         @Override
+         public void windowClosing(java.awt.event.WindowEvent e) {
             int confirm = JOptionPane.showOptionDialog(SudokuMain.this, 
-                    "Are you sure you want to exit?", 
-                    "Exit Confirmation", 
-                    JOptionPane.YES_NO_OPTION, 
-                    JOptionPane.QUESTION_MESSAGE, 
-                    null, 
-                    new Object[]{"Yes", "No"}, 
-                    "No");
+               "Are you sure you want to exit?", 
+               "Exit Confirmation", 
+               JOptionPane.YES_NO_OPTION, 
+               JOptionPane.QUESTION_MESSAGE, 
+               null, 
+               new Object[]{"Yes", "No"}, 
+               "No");
             if (confirm == JOptionPane.YES_OPTION) {
-                System.exit(0);
+               System.exit(0);
             }
-        }
-    });
+         }
+      });
 
-    setTitle("Sudoku " + playerName);
-    setVisible(true);
-}
+      setTitle("Sudoku " + playerName);
+      setVisible(true);
+   }
 
-private void handlePause() {
-    isPaused = true;
-    gamePaused = true;
-    statusBar.setText("Game paused.");
+   private void handlePause() {
+      isPaused = true;
+      gamePaused = true;
+      statusBar.setText("Game paused.");
 
-    // Create the option pane for "Resume the game?"
-    JOptionPane optionPane = new JOptionPane(
-        "Resume the game?", 
-        JOptionPane.QUESTION_MESSAGE, 
-        JOptionPane.YES_NO_OPTION
-    );
+      // Create the option pane for "Resume the game?"
+      JOptionPane optionPane = new JOptionPane(
+         "Resume the game?", 
+         JOptionPane.QUESTION_MESSAGE, 
+         JOptionPane.YES_NO_OPTION
+      );
 
-    // Create a JDialog for "Resume the game?"
-    JDialog dialog = optionPane.createDialog(this, "Game Paused");
+      // Create a JDialog for "Resume the game?"
+      JDialog dialog = optionPane.createDialog(this, "Game Paused");
 
-    // Add a WindowListener to handle when the dialog is closed via the "X"
-    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-        @Override
-        public void windowClosing(java.awt.event.WindowEvent e) {
+      // Add a WindowListener to handle when the dialog is closed via the "X"
+      dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+         @Override
+         public void windowClosing(java.awt.event.WindowEvent e) {
             isPaused = false;
-        }
-    });
+         }
+      });
 
-    dialog.setVisible(true);
+      dialog.setVisible(true);
 
-    int resumeOption = (int) optionPane.getValue();
-    if (resumeOption == JOptionPane.YES_OPTION) {
-        isPaused = false;
-        if (gamePaused) {
+      int resumeOption = (int) optionPane.getValue();
+      if (resumeOption == JOptionPane.YES_OPTION) {
+         isPaused = false;
+         if (gamePaused) {
             statusBar.setText("Game resumed.");
-        }
-    } else {
-        int exitOption = JOptionPane.showConfirmDialog(
-                this,
-                "Do you want to leave the game?",
-                "Exit Confirmation",
-                JOptionPane.YES_NO_OPTION
-        );
+         }
+      } else {
+         int exitOption = JOptionPane.showConfirmDialog(
+            this,
+            "Do you want to leave the game?",
+            "Exit Confirmation",
+            JOptionPane.YES_NO_OPTION
+         );
 
-        if (exitOption == JOptionPane.YES_OPTION) {
+         if (exitOption == JOptionPane.YES_OPTION) {
             System.exit(0);
-        } else {
+         } else {
             handlePause();
-        }
-    }
-}
+         }
+      }
+   }
 
-private void startNewGame() {
-    board.newGame();
-    elapsedSeconds = 0;
-    timerLabel.setText("Time: 00:00:00");
-    timer.restart();
-    updateStatusBar();
-    
-}
+   private void startNewGame() {
+      board.newGame();
+      elapsedSeconds = 0;
+      timerLabel.setText("Time: 00:00:00");
+      timer.restart();
+      updateStatusBar();
+   }
 
-private void updateStatusBar() {
-    statusBar.setText(playerName + "'s Sudoku - Level: " + board.getLevel());
-}
+   private void updateStatusBar() {
+      statusBar.setText(playerName + "'s Sudoku - Level: " + board.getLevel());
+   }
 
-private void resetTimer() {
-    elapsedSeconds = 0;
-    timerLabel.setText("Time: 00:00:00");
-}
+   private void resetTimer() {
+      elapsedSeconds = 0;
+      timerLabel.setText("Time: 00:00:00");
+   }
 
-private String formatTime(int totalSeconds) {
-    int hours = totalSeconds / 3600;
-    int minutes = (totalSeconds % 3600) / 60;
-    int seconds = totalSeconds % 60;
-    return String.format("%02d:%02d:%02d", hours, minutes, seconds);
-}
+   private String formatTime(int totalSeconds) {
+      int hours = totalSeconds / 3600;
+      int minutes = (totalSeconds % 3600) / 60;
+      int seconds = totalSeconds % 60;
+      return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+   }
 
-private void showDifficultyDialog() {
-    String[] options = {"Easy", "Intermediate", "Difficult"};
-    int choice = JOptionPane.showOptionDialog(this, 
-        "Select Difficulty", 
-        "Difficulty", 
-        JOptionPane.DEFAULT_OPTION, 
-        JOptionPane.INFORMATION_MESSAGE, 
-        null, 
-        options, 
-        options[0]);
+   private void showDifficultyDialog() {
+      String[] options = {"Easy", "Intermediate", "Difficult"};
+      int choice = JOptionPane.showOptionDialog(this, 
+         "Select Difficulty", 
+         "Difficulty", 
+         JOptionPane.DEFAULT_OPTION, 
+         JOptionPane.INFORMATION_MESSAGE, 
+         null, 
+         options, 
+         options[0]);
 
-    if (choice != -1) {
-        String selectedLevel = options[choice];
-        board.setLevel(selectedLevel);
-        board.newGame();
-        updateStatusBar();
-    }
-}
+      if (choice != -1) {
+         String selectedLevel = options[choice];
+         board.setLevel(selectedLevel);
+         board.newGame();
+         updateStatusBar();
+      }
+   }
 
-private void updateHighScore() {
-    if (elapsedSeconds < highScore) {
-        highScore = elapsedSeconds;
-        highScoreLabel.setText("Highscore: " + formatTime(highScore));
-        JOptionPane.showMessageDialog(this, 
+   private void updateHighScore() {
+      if (elapsedSeconds < highScore) {
+         highScore = elapsedSeconds;
+         highScoreLabel.setText("Highscore: " + formatTime(highScore));
+         JOptionPane.showMessageDialog(this, 
             "Congratulations!\nYou set a new high score: " + formatTime(highScore), 
             "New High Score", 
             JOptionPane.INFORMATION_MESSAGE);
-    }
-}
+      }
+   }
 
-public void checkGameComplete() {
-    if (board.isSolved()) {
-        timer.stop();
-        JOptionPane.showMessageDialog(this, 
+   public void checkGameComplete() {
+      if (board.isSolved()) {
+         timer.stop();
+         JOptionPane.showMessageDialog(this, 
             "Congratulations! You solved the puzzle in " + formatTime(elapsedSeconds), 
             "Puzzle Solved", 
             JOptionPane.INFORMATION_MESSAGE);
-        updateHighScore();
+         updateHighScore();
 
-        int choice = JOptionPane.showConfirmDialog(this, 
+         int choice = JOptionPane.showConfirmDialog(this, 
             "Would you like to start a new game?", 
             "Start New Game?", 
             JOptionPane.YES_NO_OPTION);
 
-        if (choice == JOptionPane.YES_OPTION) {
+         if (choice == JOptionPane.YES_OPTION) {
             startNewGame();
-        }
-    }
-}
+         }
+      }
+   }
 
-private void showAboutDialog() {
-    String message = "Sudoku Game\n" +
-                     "Created by:\n" +
-                     "  * 5026231023 - Nadya Luthfiyah Rahma\n" +
-                     "  * 5026231094 - Davina Almeira\n" +
-                     "  * 5026231148 - Tiara Aulia Azadirachta Indica";
+   private void showAboutDialog() {
+      String message = "Sudoku Game\n" +
+                        "Created by:\n" +
+                        "  * 5026231023 - Nadya Luthfiyah Rahma\n" +
+                        "  * 5026231094 - Davina Almeira\n" +
+                        "  * 5026231148 - Tiara Aulia Azadirachta Indica";
     
-    JOptionPane.showMessageDialog(this, 
-        message, 
-        "About", 
-        JOptionPane.INFORMATION_MESSAGE);
-}
+      JOptionPane.showMessageDialog(this, 
+         message, 
+         "About", 
+         JOptionPane.INFORMATION_MESSAGE);
+   }
 
-private void showWelcomeScreen() {
-    JDialog welcomeDialog = new JDialog(this, "Welcome to Sudoku!", true);
-    JPanel panel = new JPanel();
-    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+   private void showWelcomeScreen() {
+      JDialog welcomeDialog = new JDialog(this, "Welcome to Sudoku!", true);
+      JPanel panel = new JPanel();
+      panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-    JLabel labelName = new JLabel("Enter your name: ");
-    JTextField nameField = new JTextField(20);
-    JButton startButton = new JButton("Start Game");
+      JLabel labelName = new JLabel("Enter your name: ");
+      JTextField nameField = new JTextField(20);
+      JButton startButton = new JButton("Start Game");
 
-    startButton.addActionListener(e -> {
-        playerName = nameField.getText().trim().isEmpty() ? "Player" : nameField.getText();
-        statusBar.setText(playerName + "'s Sudoku - Level: " + board.getLevel());
-        welcomeDialog.dispose();
-    });
+      startButton.addActionListener(e -> {
+         playerName = nameField.getText().trim().isEmpty() ? "Player" : nameField.getText();
+         statusBar.setText(playerName + "'s Sudoku - Level: " + board.getLevel());
+         welcomeDialog.dispose();
+      });
 
-    panel.add(labelName);
-    panel.add(nameField);
-    panel.add(startButton);
+      panel.add(labelName);
+      panel.add(nameField);
+      panel.add(startButton);
 
-    welcomeDialog.add(panel);
-    welcomeDialog.pack();
-    welcomeDialog.setLocationRelativeTo(this);
-    welcomeDialog.setVisible(true);
-}
+      welcomeDialog.add(panel);
+      welcomeDialog.pack();
+      welcomeDialog.setLocationRelativeTo(this);
+      welcomeDialog.setVisible(true);
+   }
 
-public static void main(String[] args) {
-    SwingUtilities.invokeLater(()-> new SudokuMain());
-}
+   public static void main(String[] args) {
+      SwingUtilities.invokeLater(SudokuMain::new);
+   }
 }
