@@ -1,0 +1,99 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"faf1bdcc-47fe-4af0-9601-27eefd386bd3\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/Board.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/Cell.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/GameMaiin.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Tiaracoba.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/Capstone-Project/.idea/.gitignore\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/Capstone-Project/.idea/Capstone-Project.iml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/Capstone-Project/.idea/misc.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/Capstone-Project/.idea/modules.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/Capstone-Project/.idea/vcs.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/Capstone-Project/Tiaracoba.class\" beforeDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"ASD_SUDOKU\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 4\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2pQCF2hngmkmgntVDW6rKmmLQzX\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.Tiaracoba.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"git-widget-placeholder\": \"ASD__TICTACTOE\",\r\n    \"kotlin-language-version-configured\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"faf1bdcc-47fe-4af0-9601-27eefd386bd3\" name=\"Changes\" comment=\"\" />\r\n      <created>1732688804734</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1732688804734</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Test commit\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Test commit\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,18 +4,12 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="faf1bdcc-47fe-4af0-9601-27eefd386bd3" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/Board.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/Cell.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/GameMaiin.java" afterDir="false" />
++    <list default="true" id="faf1bdcc-47fe-4af0-9601-27eefd386bd3" name="Changes" comment="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push">
++      <change afterPath="$PROJECT_DIR$/SoundEffect.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/TTT.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Tiaracoba.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/Capstone-Project/.idea/.gitignore" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/Capstone-Project/.idea/Capstone-Project.iml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/Capstone-Project/.idea/misc.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/Capstone-Project/.idea/modules.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/Capstone-Project/.idea/vcs.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/Capstone-Project/Tiaracoba.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cell.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/GameMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameMain.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -48,6 +42,8 @@
+   </component>
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
++    "Application.GameMain.executor": "Run",
++    "Application.TTT.executor": "Run",
+     "Application.Tiaracoba.executor": "Run",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "git-widget-placeholder": "ASD__TICTACTOE",
+@@ -63,6 +59,15 @@
+       <option name="presentableId" value="Default" />
+       <updated>1732688804734</updated>
+     </task>
++    <task id="LOCAL-00001" summary="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push">
++      <option name="closed" value="true" />
++      <created>1733284744447</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1733284744447</updated>
++    </task>
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -78,6 +83,7 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Test commit" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Test commit" />
++    <MESSAGE value="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push" />
++    <option name="LAST_COMMIT_MESSAGE" value="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: GameMain.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.Scanner;\r\n/**\r\n * The main class for the Tic-Tac-Toe (Console-OO, non-graphics version)\r\n * It acts as the overall controller of the game.\r\n */\r\npublic class GameMain {\r\n    // Define properties\r\n    /** The game board */\r\n    private Board board;\r\n    /** The current state of the game (of enum State) */\r\n    private State currentState;\r\n    /** The current player (of enum Seed) */\r\n    private Seed  currentPlayer;\r\n\r\n    private static Scanner in = new Scanner(System.in);\r\n\r\n    /** Constructor to setup the game */\r\n    public GameMain() {\r\n        // Perform one-time initialization tasks\r\n        initGame();\r\n\r\n        // Reset the board, currentStatus and currentPlayer\r\n        newGame();\r\n\r\n        // Play the game once\r\n        do {\r\n            // The currentPlayer makes a move.\r\n            // Update cells[][] and currentState\r\n            stepGame();\r\n            // Refresh the display\r\n            board.paint();\r\n            // Print message if game over\r\n            if (currentState == State.CROSS_WON) {\r\n                System.out.println(\"'X' won!\\nBye!\");\r\n            } else if (currentState == State.NOUGHT_WON) {\r\n                System.out.println(\"'O' won!\\nBye!\");\r\n            } else if (currentState == State.DRAW) {\r\n                System.out.println(\"It's Draw!\\nBye!\");\r\n            }\r\n            // Switch currentPlayer\r\n            currentPlayer = (currentPlayer == Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;\r\n        } while (currentState == State.PLAYING);  // repeat until game over\r\n    }\r\n\r\n    /** Perform one-time initialization tasks */\r\n    public void initGame() {\r\n        board = new Board();  // allocate game-board\r\n    }\r\n\r\n    /** Reset the game-board contents and the current states, ready for new game */\r\n    public void newGame() {\r\n        board.newGame();  // clear the board contents\r\n        currentPlayer = Seed.CROSS;   // CROSS plays first\r\n        currentState = State.PLAYING; // ready to play\r\n    }\r\n\r\n    /** The currentPlayer makes one move.\r\n     Update cells[][] and currentState. */\r\n    public void stepGame() {\r\n        boolean validInput = false;  // for validating input\r\n        do {\r\n            String icon = currentPlayer.getIcon();\r\n            System.out.print(\"Player '\" + icon + \"', enter your move (row[1-3] column[1-3]): \");\r\n            int row = in.nextInt() - 1;   // [0-2]\r\n            int col = in.nextInt() - 1;\r\n            if (row >= 0 && row < Board.ROWS && col >= 0 && col < Board.COLS\r\n                    && board.cells[row][col].content == Seed.NO_SEED) {\r\n                // Update cells[][] and return the new game state after the move\r\n                currentState = board.stepGame(currentPlayer, row, col);\r\n                validInput = true; // input okay, exit loop\r\n            } else {\r\n                System.out.println(\"This move at (\" + (row + 1) + \",\" + (col + 1)\r\n                        + \") is not valid. Try again...\");\r\n            }\r\n        } while (!validInput);   // repeat until input is valid\r\n    }\r\n\r\n    /** The entry main() method */\r\n    public static void main(String[] args) {\r\n        new GameMain();  // Let the constructor do the job\r\n    }\r\n}
+===================================================================
+diff --git a/GameMain.java b/GameMain.java
+--- a/GameMain.java	
++++ b/GameMain.java	
+@@ -65,7 +65,7 @@
+             int col = in.nextInt() - 1;
+             if (row >= 0 && row < Board.ROWS && col >= 0 && col < Board.COLS
+                     && board.cells[row][col].content == Seed.NO_SEED) {
+-                // Update cells[][] and return the new game state after the move
++                // Update cell[][] and return the new game state after the move
+                 currentState = board.stepGame(currentPlayer, row, col);
+                 validInput = true; // input okay, exit loop
+             } else {
+@@ -79,4 +79,11 @@
+     public static void main(String[] args) {
+         new GameMain();  // Let the constructor do the job
+     }
++
++        // Play appropriate sound clip
++        if (currentState == State.PLAYING) {
++            SoundEffect.EAT_FOOD.play();
++        } else {
++            SoundEffect.DIE.play();
++        }
+ }
+\ No newline at end of file

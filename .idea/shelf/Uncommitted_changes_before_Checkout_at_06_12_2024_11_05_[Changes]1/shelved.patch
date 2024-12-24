@@ -1,0 +1,266 @@
+Index: Cell.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/**\r\n * The Cell class models each individual cell of the TTT 3x3 grid.\r\n */\r\npublic class Cell {  // save as \"Cell.java\"\r\n    // Define properties (package-visible)\r\n    /** Content of this cell (CROSS, NOUGHT, NO_SEED) */\r\n    Seed content;\r\n    /** Row and column of this cell, not used in this program */\r\n    int row, col;\r\n\r\n    /** Constructor to initialize this cell */\r\n    public Cell(int row, int col) {\r\n        this.row = row;\r\n        this.col = col;\r\n        this.content = Seed.NO_SEED;\r\n    }\r\n\r\n    /** Reset the cell content to EMPTY, ready for a new game. */\r\n    public void newGame() {\r\n        this.content = Seed.NO_SEED;\r\n    }\r\n\r\n    /** The cell paints itself */\r\n    public void paint() {\r\n        // Retrieve the display icon (text) and print\r\n        String icon = this.content.getIcon();\r\n        System.out.print(icon);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Cell.java b/Cell.java
+--- a/Cell.java	
++++ b/Cell.java	
+@@ -26,4 +26,6 @@
+         String icon = this.content.getIcon();
+         System.out.print(icon);
+     }
++
++
+ }
+\ No newline at end of file
+Index: SoundEffect.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/SoundEffect.java b/SoundEffect.java
+new file mode 100644
+--- /dev/null	
++++ b/SoundEffect.java	
+@@ -0,0 +1,69 @@
++import java.io.IOException;
++import java.net.URL;
++import javax.sound.sampled.AudioInputStream;
++import javax.sound.sampled.AudioSystem;
++import javax.sound.sampled.Clip;
++import javax.sound.sampled.LineUnavailableException;
++import javax.sound.sampled.UnsupportedAudioFileException;
++/**
++ * This enum encapsulates all the sound effects of a game, so as to separate the sound playing
++ * codes from the game codes.
++ * 1. Define all your sound effect names and the associated wave file.
++ * 2. To play a specific sound, simply invoke SoundEffect.SOUND_NAME.play().
++ * 3. You might optionally invoke the static method SoundEffect.initGame() to pre-load all the
++ *    sound files, so that the play is not paused while loading the file for the first time.
++ * 4. You can the static variable SoundEffect.volume to SoundEffect.Volume.MUTE
++ *    to mute the sound.
++ *
++ * For Eclipse, place the audio file under "src", which will be copied into "bin".
++ */
++public enum SoundEffect {
++    EAT_FOOD("audio/eatfood.wav"),
++    EXPLODE("audio/explode.wav"),
++    DIE("audio/die.wav");
++
++    /** Nested enumeration for specifying volume */
++    public static enum Volume {
++        MUTE, LOW, MEDIUM, HIGH
++    }
++
++    public static Volume volume = Volume.LOW;
++
++    /** Each sound effect has its own clip, loaded with its own sound file. */
++    private Clip clip;
++
++    /** Private Constructor to construct each element of the enum with its own sound file. */
++    private SoundEffect(String soundFileName) {
++        try {
++            // Use URL (instead of File) to read from disk and JAR.
++            URL url = this.getClass().getClassLoader().getResource(soundFileName);
++            // Set up an audio input stream piped from the sound file.
++            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
++            // Get a clip resource.
++            clip = AudioSystem.getClip();
++            // Open audio clip and load samples from the audio input stream.
++            clip.open(audioInputStream);
++        } catch (UnsupportedAudioFileException e) {
++            e.printStackTrace();
++        } catch (IOException e) {
++            e.printStackTrace();
++        } catch (LineUnavailableException e) {
++            e.printStackTrace();
++        }
++    }
++
++    /** Play or Re-play the sound effect from the beginning, by rewinding. */
++    public void play() {
++        if (volume != Volume.MUTE) {
++            if (clip.isRunning())
++                clip.stop();   // Stop the player if it is still running
++            clip.setFramePosition(0); // rewind to the beginning
++            clip.start();     // Start playing
++        }
++    }
++
++    /** Optional static method to pre-load all the sound files. */
++    static void initGame() {
++        values(); // calls the constructor for all the elements
++    }
++}
+\ No newline at end of file
+Index: TTT.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/TTT.java b/TTT.java
+new file mode 100644
+--- /dev/null	
++++ b/TTT.java	
+@@ -0,0 +1,157 @@
++import java.util.Scanner;
++/**
++ * Tic-Tac-Toe: Two-player, console-based, non-graphics, non-OO version.
++ * All variables/methods are declared as static (i.e., class)
++ *  in this non-OO version.
++ */
++public class TTT {
++    // Define named constants for:
++    //  1. Player: using CROSS and NOUGHT
++    //  2. Cell contents: using CROSS, NOUGHT and NO_SEED
++    public static final int CROSS   = 0;
++    public static final int NOUGHT  = 1;
++    public static final int NO_SEED = 2;
++
++    // The game board
++    public static final int ROWS = 3, COLS = 3;  // number of rows/columns
++    public static int[][] board = new int[ROWS][COLS]; // EMPTY, CROSS, NOUGHT
++
++    // The current player
++    public static int currentPlayer;  // CROSS, NOUGHT
++
++    // Define named constants to represent the various states of the game
++    public static final int PLAYING    = 0;
++    public static final int DRAW       = 1;
++    public static final int CROSS_WON  = 2;
++    public static final int NOUGHT_WON = 3;
++    // The current state of the game
++    public static int currentState;
++
++    public static Scanner in = new Scanner(System.in); // the input Scanner
++
++    /** The entry main method (the program starts here) */
++    public static void main(String[] args) {
++        // Initialize the board, currentState and currentPlayer
++        initGame();
++
++        // Play the game once
++        do {
++            // currentPlayer makes a move
++            // Update board[selectedRow][selectedCol] and currentState
++            stepGame();
++            // Refresh the display
++            paintBoard();
++            // Print message if game over
++            if (currentState == CROSS_WON) {
++                System.out.println("'X' won!\nBye!");
++            } else if (currentState == NOUGHT_WON) {
++                System.out.println("'O' won!\nBye!");
++            } else if (currentState == DRAW) {
++                System.out.println("It's a Draw!\nBye!");
++            }
++            // Switch currentPlayer
++            currentPlayer = (currentPlayer == CROSS) ? NOUGHT : CROSS;
++        } while (currentState == PLAYING); // repeat if not game over
++    }
++
++    /** Initialize the board[][], currentState and currentPlayer for a new game*/
++    public static void initGame() {
++        for (int row = 0; row < ROWS; ++row) {
++            for (int col = 0; col < COLS; ++col) {
++                board[row][col] = NO_SEED;  // all cells empty
++            }
++        }
++        currentPlayer = CROSS;   // cross plays first
++        currentState  = PLAYING; // ready to play
++    }
++
++    /** The currentPlayer makes one move (one step).
++     Update board[selectedRow][selectedCol] and currentState. */
++    public static void stepGame() {
++        boolean validInput = false;  // for input validation
++        do {
++            if (currentPlayer == CROSS) {
++                System.out.print("Player 'X', enter your move (row[1-3] column[1-3]): ");
++            } else {
++                System.out.print("Player 'O', enter your move (row[1-3] column[1-3]): ");
++            }
++            int row = in.nextInt() - 1;  // array index starts at 0 instead of 1
++            int col = in.nextInt() - 1;
++            if (row >= 0 && row < ROWS && col >= 0 && col < COLS
++                    && board[row][col] == NO_SEED) {
++                // Update board[][] and return the new game state after the move
++                currentState = stepGameUpdate(currentPlayer, row, col);
++                validInput = true;  // input okay, exit loop
++            } else {
++                System.out.println("This move at (" + (row + 1) + "," + (col + 1)
++                        + ") is not valid. Try again...");
++            }
++        } while (!validInput);  // repeat if input is invalid
++    }
++
++    /**
++     * Helper function of stepGame().
++     * The given player makes a move at (selectedRow, selectedCol).
++     * Update board[selectedRow][selectedCol]. Compute and return the
++     * new game state (PLAYING, DRAW, CROSS_WON, NOUGHT_WON).
++     * @return new game state
++     */
++    public static int stepGameUpdate(int player, int selectedRow, int selectedCol) {
++        // Update game board
++        board[selectedRow][selectedCol] = player;
++
++        // Compute and return the new game state
++        if (board[selectedRow][0] == player       // 3-in-the-row
++                && board[selectedRow][1] == player
++                && board[selectedRow][2] == player
++                || board[0][selectedCol] == player // 3-in-the-column
++                && board[1][selectedCol] == player
++                && board[2][selectedCol] == player
++                || selectedRow == selectedCol      // 3-in-the-diagonal
++                && board[0][0] == player
++                && board[1][1] == player
++                && board[2][2] == player
++                || selectedRow + selectedCol == 2  // 3-in-the-opposite-diagonal
++                && board[0][2] == player
++                && board[1][1] == player
++                && board[2][0] == player) {
++            return (player == CROSS) ? CROSS_WON : NOUGHT_WON;
++        } else {
++            // Nobody win. Check for DRAW (all cells occupied) or PLAYING.
++            for (int row = 0; row < ROWS; ++row) {
++                for (int col = 0; col < COLS; ++col) {
++                    if (board[row][col] == NO_SEED) {
++                        return PLAYING; // still have empty cells
++                    }
++                }
++            }
++            return DRAW; // no empty cell, it's a draw
++        }
++    }
++
++    /** Print the game board */
++    public static void paintBoard() {
++        for (int row = 0; row < ROWS; ++row) {
++            for (int col = 0; col < COLS; ++col) {
++                paintCell(board[row][col]); // print each of the cells
++                if (col != COLS - 1) {
++                    System.out.print("|");   // print vertical partition
++                }
++            }
++            System.out.println();
++            if (row != ROWS - 1) {
++                System.out.println("-----------"); // print horizontal partition
++            }
++        }
++        System.out.println();
++    }
++
++    /** Print a cell having the given content */
++    public static void paintCell(int content) {
++        switch (content) {
++            case CROSS:   System.out.print(" X "); break;
++            case NOUGHT:  System.out.print(" O "); break;
++            case NO_SEED: System.out.print("   "); break;
++        }
++    }
++}
+\ No newline at end of file

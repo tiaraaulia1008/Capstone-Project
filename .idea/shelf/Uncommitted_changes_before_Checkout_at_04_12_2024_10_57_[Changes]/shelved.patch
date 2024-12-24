@@ -1,0 +1,35 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"faf1bdcc-47fe-4af0-9601-27eefd386bd3\" name=\"Changes\" comment=\"git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/GameBoardPanel.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/GameBoardPanel.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 4\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2pQCF2hngmkmgntVDW6rKmmLQzX\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.SudokuMain.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"git-widget-placeholder\": \"ASD__SUDOKU\",\r\n    \"kotlin-language-version-configured\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"faf1bdcc-47fe-4af0-9601-27eefd386bd3\" name=\"Changes\" comment=\"\" />\r\n      <created>1732688804734</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1732688804734</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Add GameMain, Board, and Cell classes for Tic Tac Toe\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1733048950225</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1733048950225</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Add Cell, CellStatus, GameBoardPanel, Main, Puzzle, SudokuConstants, and SudokuMain\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1733049557724</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1733049557724</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1733101988894</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1733101988894</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1733102692107</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1733102692107</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"5\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Add Cell, CellStatus, GameBoardPanel, Main, Puzzle, SudokuConstants, and SudokuMain\" />\r\n    <MESSAGE value=\"git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -6,7 +6,6 @@
+   <component name="ChangeListManager">
+     <list default="true" id="faf1bdcc-47fe-4af0-9601-27eefd386bd3" name="Changes" comment="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/GameBoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameBoardPanel.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -81,7 +80,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1733102692107</updated>
+     </task>
+-    <option name="localTasksCounter" value="5" />
++    <task id="LOCAL-00005" summary="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push">
++      <option name="closed" value="true" />
++      <created>1733103829380</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1733103829380</updated>
++    </task>
++    <option name="localTasksCounter" value="6" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="faf1bdcc-47fe-4af0-9601-27eefd386bd3" name="Changes" comment="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sudoku/GameBoardPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sudoku/TTT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CellStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/CellStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameBoardPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Puzzle.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/Puzzle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SudokuConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/SudokuConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SudokuMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku/SudokuMain.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="ASD_TICTACTOE" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2pQCF2hngmkmgntVDW6rKmmLQzX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.SudokuMain.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "ASD__SUDOKU",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="faf1bdcc-47fe-4af0-9601-27eefd386bd3" name="Changes" comment="" />
+      <created>1732688804734</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732688804734</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Add GameMain, Board, and Cell classes for Tic Tac Toe">
+      <option name="closed" value="true" />
+      <created>1733048950225</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733048950225</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add Cell, CellStatus, GameBoardPanel, Main, Puzzle, SudokuConstants, and SudokuMain">
+      <option name="closed" value="true" />
+      <created>1733049557724</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733049557724</updated>
+    </task>
+    <task id="LOCAL-00003" summary="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push">
+      <option name="closed" value="true" />
+      <created>1733101988894</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733101988894</updated>
+    </task>
+    <task id="LOCAL-00004" summary="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push">
+      <option name="closed" value="true" />
+      <created>1733102692107</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733102692107</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add Cell, CellStatus, GameBoardPanel, Main, Puzzle, SudokuConstants, and SudokuMain" />
+    <MESSAGE value="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push" />
+    <option name="LAST_COMMIT_MESSAGE" value="git add .&#10;git commit -m &quot;Pesan commit&quot;&#10;git push" />
+  </component>
+</project>
